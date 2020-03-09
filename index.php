@@ -39,17 +39,18 @@ if (!$course) {
 $context = context_course::instance($course->id);
 $url = new moodle_url('/report/simplereport/index.php', ['course' => $id]);
 
+$PAGE->set_course($COURSE);
 $PAGE->set_url($url);
+$PAGE->set_heading($SITE->fullname);
 $PAGE->set_pagelayout('admin');
+$PAGE->set_title(get_string('pluginname', 'report_simplereport'));
 
 require_login($course);
 
 // Check basic permission.
 require_capability('report/simplereport:view',$context);
 
-echo $OUTPUT->header();
-echo $OUTPUT->heading(get_string('pluginname','report_simplereport'));
 $eventrecords = $DB->get_records('event', ['courseid' => $id], null,
         'name, description, timestart');
-var_dump($eventrecords);
-echo $OUTPUT->footer();
+$renderer = $PAGE->get_renderer('report_simplereport');
+$renderer->display_events($eventrecords);

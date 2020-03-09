@@ -1,0 +1,48 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see .
+}}
+
+{{!
+    @template for event report data
+
+    This template renders a table of data items with headers.
+
+    Example context (json):
+    {
+        data: [ [item1row 1, item2row 1], [item2row1, item2row2] ]
+    }
+}}
+<div class = "table-responsive">
+    <table class = "table table-striped">
+        <caption>
+            {{# str }} caption, report_simplereport {{/ str }}
+        </caption>
+        <thead>
+            <th>{{# str }} time, report_simplereport {{/ str }} </th>
+            <th>{{# str }} event, report_simplereport {{/ str }} </th>
+            <th>{{# str }} description, report_simplereport {{/ str }} </th>
+        </thead>
+        <tbody>
+            {{#events}}
+                <tr>
+                    <td>{{#userdate}} {{timestart}}, %d %B %Y %I:%M %p{{/userdate}}</td>
+                    <td>{{name}}</td>
+                    <td>{{description}}</td>
+                </tr>
+            {{/events}}
+        </tbody>
+    </table>
+</div>
