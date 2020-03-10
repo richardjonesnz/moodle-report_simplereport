@@ -50,7 +50,10 @@ require_login($course);
 // Check basic permission.
 require_capability('report/simplereport:view',$context);
 
+// Get the calendar events for this course.
 $eventrecords = $DB->get_records('event', ['courseid' => $id], null,
         'name, description, timestart');
+
+// Call the renderer to display the results.
 $renderer = $PAGE->get_renderer('report_simplereport');
 $renderer->display_events($eventrecords);

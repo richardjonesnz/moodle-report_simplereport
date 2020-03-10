@@ -16,17 +16,17 @@
 }}
 
 {{!
-    @template for event report data
+    @template simplereport/report
 
-    This template renders a table of data items with headers.
+    This template renders a table of calendar events.
 
     Example context (json):
     {
-        data: [ [item1row 1, item2row 1], [item2row1, item2row2] ]
+        data: [ [time, name, description], [] ]
     }
 }}
-<div class = "table-responsive">
-    <table class = "table table-striped">
+<div class="table-responsive">
+    <table class="table table-striped">
         <caption>
             {{# str }} caption, report_simplereport {{/ str }}
         </caption>
@@ -38,9 +38,13 @@
         <tbody>
             {{#events}}
                 <tr>
-                    <td>{{#userdate}} {{timestart}}, %d %B %Y %I:%M %p{{/userdate}}</td>
+                    <td>
+                        {{#userdate}}
+                            {{timestart}}, %d %B %Y %I:%M %p
+                        {{/userdate}}
+                    </td>
                     <td>{{name}}</td>
-                    <td>{{description}}</td>
+                    <td>{{{description}}}</td>
                 </tr>
             {{/events}}
         </tbody>

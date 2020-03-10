@@ -33,15 +33,9 @@ class report_simplereport_renderer extends plugin_renderer_base {
 
  function display_events($eventrecords) {
 
+        // The param is an array of objects which Mustache won't iterate over.
         $data = new stdClass();
-
-        foreach($eventrecords as $eventrecord) {
-            $event = array();
-            $event['timestart'] = $eventrecord->timestart;
-            $event['name'] = $eventrecord->name;
-            $event['description'] = $eventrecord->description;
-            $data->events[] = $event;
-        }
+        $data->events = array_values($eventrecords);
 
         echo $this->output->header();
         echo $this->render_from_template('report_simplereport/report', $data);
